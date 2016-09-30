@@ -1,0 +1,18 @@
+language: node_js
+branches:
+  only:
+  - master
+before_install:
+- npm install -g hexo
+- npm install
+install:
+- hexo generate
+before_script:
+- git config --global user.name 'Ændrew Rininsland via Travis CI'
+- git config --global user.email 'aendrew@aendrew.com'
+- sed -i'' "s~git@github.com:aendrew/chasing.cloud.git~https://${GH_TOKEN}:x-oauth-basic@github.com/aendrew/chasing.cloud.git~" _config.yml
+script:
+- hexo deploy --silent
+env:
+  global:
+    secure: fNHj/VZRRqfCBSVVbQyZDfdkDPghOc0a+WxJ17WloG/cundyX0LbJbNPXOsnrkHodI/+BBEeR4GMTC83RMnuT+7+YDkpXW+MbJp9GZUnhs6ykN/rsi0QdUHk9kBTRNuLAHFKW+r+YujW3mdAaMcD2WUI9McNbg59OHvNFXyfnbUMWIVUvnNOUy5DGVsgbC6f1/HBH8vgZziREkMolxImm2QVjvp0NmBaHU2wgTALuLHTGuo4YmSzIoDsVbN8sSaHPuR8Yd9qCVFkGbC8jKCaKgULOKkTarHmPC4s/dWYND4ENNJdKanJWrgnb096M+yBIEBiiR+Nz5lc6Dmm+wtYm3ojxUZjr8fIunf+hf9sF5E7ckn1HHozfSNnUDx07/SJROlOFsj2Me+v8PsJjKWb15H1npjkA727QkzRVxwUaPFz7xw7TpEhw6+zkHsbKWQJffMCCXHOYCNOQFr5846H9HH0fjM348lpSb42XkCzeQhC4Xu2AqahL1OH+rCLkKojM9Sv6uLU6bswolPfha5h3ztmUpqEKRHvv320cH0TGBIfFq5A47eajA/IVGzSkFngSKAqEilPFYWCNLhLliai3z8bulwtnCqkr9BvWiQRrkmHGgR5XWSNXCYXX9OdxEXssnqaf4oZadsqa6s57P65otGXjdM8Chi0qHNB069X04s=
